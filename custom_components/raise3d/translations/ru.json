@@ -1,0 +1,213 @@
+{
+  "config": {
+    "title": "Конфигурация принтера Raise3D",
+    "step": {
+      "user": {
+        "title": "Укажите соединение с принтером Raise3D",
+        "data": {
+          "host": "URL или IP-адрес принтера",
+          "scan_interval": "Частота опроса API в секундах",
+          "conf_port": "Конфигурация порта",
+          "conf_password": "Пароль принтера"
+        }
+      }
+    },
+    "error": {
+      "already_configured": "Устройство уже настроено",
+      "connection_error": "Ошибка соединения",
+      "invalid_password": "Неверный пароль"
+    },
+    "abort": {
+      "already_configured": "Устройство уже настроено"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "Serial_number": {
+        "name": "Серийный номер"
+      },
+      "api_version": {
+        "name": "Версия API"
+      },
+      "battery": {
+        "name": "Напряжение батареи"
+      },
+      "brightness": {
+        "name": "Яркость экрана"
+      },
+      "date_time": {
+        "name": "Время UTC"
+      },
+      "firmware_version": {
+        "name": "Версия прошивки"
+      },
+      "language": {
+        "name": "Языковые локали"
+      },
+      "machine_id": {
+        "name": "ID принтера"
+      },
+      "machine_ip": {
+        "name": "IP принтера"
+      },
+      "machine_name": {
+        "name": "Имя принтера"
+      },
+      "model": {
+        "name": "Модель"
+      },
+      "nozzies_num": {
+        "name": "Количество сопел"
+      },
+      "storage_available": {
+        "name": "Доступное хранилище"
+      },
+      "update": {
+        "name": "Обновление"
+      },
+      "version": {
+        "name": "Версия"
+      },
+      "camerserver_URI": {
+        "name": "URI сервера камеры"
+      },
+      "password": {
+        "name": "Пароль"
+      },
+      "running_status": {
+        "name": "Статус работы"
+      },
+      "fan_cur_speed": {
+        "name": "Текущая скорость вентилятора"
+      },
+      "feed_cur_rate": {
+        "name": "Текущая скорость подачи сопла"
+      },
+      "feed_tar_rate": {
+        "name": "Целевая скорость подачи сопла"
+      },
+      "heatbed_cur_temp": {
+        "name": "Текущая температура стола"
+      },
+      "LN_flow_cur_rate": {
+        "name": "Скорость экструзии левого сопла"
+      },
+      "LN_nozzle_cur_temp": {
+        "name": "Температура левого сопла"
+      },
+      "RN_flow_cur_rate": {
+        "name": "Скорость экструзии правого сопла"
+      },
+      "RN_nozzle_cur_temp": {
+        "name": "Температура правого сопла"
+      },
+      "file_name": {
+        "name": "Имя файла"
+      },
+      "print_progress": {
+        "name": "Прогресс печати"
+      },
+      "printed_layer": {
+        "name": "Напечатанные слои"
+      },
+      "total_layer": {
+        "name": "Всего слоев"
+      },
+      "printed_time": {
+        "name": "Время печати"
+      },
+      "total_time": {
+        "name": "Общее время"
+      },
+      "remaining_time": {
+        "name": "Оставшееся время"
+      },
+      "job_id": {
+        "name": "ID задания"
+      },
+      "job_status": {
+        "name": "Статус задания"
+      },
+      "printed_file_num": {
+        "name": "Количество напечатанных файлов"
+      },
+      "printed_total_time": {
+        "name": "Общее время печати"
+      },
+      "printed_used_filament_left": {
+        "name": "Использованный филамент левым экструдером"
+      },
+      "printed_used_filament_right": {
+        "name": "Использованный филамент правым экструдером"
+      },
+      "printed_used_filament": {
+        "name": "Общее количество использованного филамента"
+      }
+    },
+    "camera": {
+      "camera": {
+        "name": "Камера печати"
+      }
+    },
+    "binary_sensor": {
+      "is_camera_connected": {
+        "name": "Статус камеры"
+      }
+    },
+    "number": {
+      "heatbed_tar_temp": {
+        "name": "Целевая температура стола"
+      },
+      "fan_tar_speed": {
+        "name": "Целевая скорость вентилятора"
+      },
+      "LN_flow_tar_rate": {
+        "name": "Целевая скорость экструзии левого сопла"
+      },
+      "LN_nozzle_tar_temp": {
+        "name": "Целевая температура левого сопла"
+      },
+      "RN_flow_tar_rate": {
+        "name": "Целевая скорость экструзии правого сопла"
+      },
+      "RN_nozzle_tar_temp": {
+        "name": "Целевая температура правого сопла"
+      }
+    },
+    "button": {
+      "recover_last_job": {
+        "name": "Восстановить последнее задание"
+      },
+      "move_home": {
+        "name": "Переместить в начальное положение"
+      },
+      "move_negative_x": {
+        "name": "Сместить влево"
+      },
+      "move_positive_x": {
+        "name": "Сместить вправо"
+      },
+      "move_negative_y": {
+        "name": "Сместить назад"
+      },
+      "move_positive_y": {
+        "name": "Сместить вперед"
+      },
+      "move_negative_z": {
+        "name": "Сместить вниз"
+      },
+      "move_positive_z": {
+        "name": "Сместить вверх"
+      },
+      "job_action_pause": {
+        "name": "Приостановить задание"
+      },
+      "job_action_resume": {
+        "name": "Возобновить задание"
+      },
+      "job_action_stop": {
+        "name": "Остановить задание"
+      }
+    }
+  }
+}

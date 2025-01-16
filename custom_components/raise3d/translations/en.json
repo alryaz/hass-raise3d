@@ -1,0 +1,213 @@
+{
+  "config": {
+    "title": "Raise3D printer configuration",
+    "step": {
+      "user": {
+        "title": "Define your Raise3D printer connection",
+        "data": {
+          "host": "The url or ip address of the printer",
+          "scan_interval": "The polling frequency of the API in seconds",
+          "conf_port": "Port configuration",
+          "conf_password": "Printer password"
+        }
+      }
+    },
+    "error": {
+      "already_configured": "Device is already configured",
+      "connection_error": "Connection error",
+      "invalid_password": "Invalid password"
+    },
+    "abort": {
+      "already_configured": "Device is already configured"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "Serial_number": {
+        "name": "Serial Number"
+      },
+      "api_version": {
+        "name": "Api Version"
+      },
+      "battery": {
+        "name": "Battery Voltage"
+      },
+      "brightness": {
+        "name": "Screen Brightness"
+      },
+      "date_time": {
+        "name": "Utc Time"
+      },
+      "firmware_version": {
+        "name": "Firmware Version"
+      },
+      "language": {
+        "name": "Language Locales"
+      },
+      "machine_id": {
+        "name": "Printer Id"
+      },
+      "machine_ip": {
+        "name": "Printer Ip"
+      },
+      "machine_name": {
+        "name": "Printer Name"
+      },
+      "model": {
+        "name": "Model"
+      },
+      "nozzies_num": {
+        "name": "Number Of Nozzles"
+      },
+      "storage_available": {
+        "name": "Availabe Storage"
+      },
+      "update": {
+        "name": "Update"
+      },
+      "version": {
+        "name": "Version"
+      },
+      "camerserver_URI": {
+        "name": "Camera Server Uri"
+      },
+      "password": {
+        "name": "Password"
+      },
+      "running_status": {
+        "name": "Running Status"
+      },
+      "fan_cur_speed": {
+        "name": "Current Fan Speed"
+      },
+      "feed_cur_rate": {
+        "name": "Current Nozzle Feed Speed"
+      },
+      "feed_tar_rate": {
+        "name": "Target Nozzle Feed Speed"
+      },
+      "heatbed_cur_temp": {
+        "name": "Current Heatbed Temp"
+      },
+      "LN_flow_cur_rate": {
+        "name": "Left Nozzle Current Extrusion Speed"
+      },
+      "LN_nozzle_cur_temp": {
+        "name": "Left Nozzle Current Temperature"
+      },
+      "RN_flow_cur_rate": {
+        "name": "Right Nozzle Current Extrusion Speed"
+      },
+      "RN_nozzle_cur_temp": {
+        "name": "Right Nozzle Current Temperature"
+      },
+      "file_name": {
+        "name": "File Name"
+      },
+      "print_progress": {
+        "name": "Print Progress"
+      },
+      "printed_layer": {
+        "name": "Printed Layers"
+      },
+      "total_layer": {
+        "name": "Total Layers"
+      },
+      "printed_time": {
+        "name": "Printing Time"
+      },
+      "total_time": {
+        "name": "Total Time"
+      },
+      "remaining_time": {
+        "name": "Remaining Time"
+      },
+      "job_id": {
+        "name": "Job Id"
+      },
+      "job_status": {
+        "name": "Job Status"
+      },
+      "printed_file_num": {
+        "name": "Printed File Count"
+      },
+      "printed_total_time": {
+        "name": "Total Printed Time"
+      },
+      "printed_used_filament_left": {
+        "name": "Left Extruder Used Filament"
+      },
+      "printed_used_filament_right": {
+        "name": "Right Extruder Used Filament"
+      },
+      "printed_used_filament": {
+        "name": "Total Used Filament"
+      }
+    },
+    "camera": {
+      "camera": {
+        "name": "Printing Camera"
+      }
+    },
+    "binary_sensor": {
+      "is_camera_connected": {
+        "name": "Camera Status"
+      }
+    },
+    "number": {
+      "heatbed_tar_temp": {
+        "name": "Target Heatbed Temp"
+      },
+      "fan_tar_speed": {
+        "name": "Target Fan Speed"
+      },
+      "LN_flow_tar_rate": {
+        "name": "Left Nozzle Target Extrusion Speed"
+      },
+      "LN_nozzle_tar_temp": {
+        "name": "Left Nozzle Target Temperature"
+      },
+      "RN_flow_tar_rate": {
+        "name": "Right Nozzle Target Extrusion Speed"
+      },
+      "RN_nozzle_tar_temp": {
+        "name": "Right Nozzle Target Temperature"
+      }
+    },
+    "button": {
+      "recover_last_job": {
+        "name": "Recover Last Job"
+      },
+      "move_home": {
+        "name": "Move Home"
+      },
+      "move_negative_x": {
+        "name": "Relative Move Left"
+      },
+      "move_positive_x": {
+        "name": "Relative Move Right"
+      },
+      "move_negative_y": {
+        "name": "Relative Move Backward"
+      },
+      "move_positive_y": {
+        "name": "Relative Move Forward"
+      },
+      "move_negative_z": {
+        "name": "Relative Move Down"
+      },
+      "move_positive_z": {
+        "name": "Relative Move Up"
+      },
+      "job_action_pause": {
+        "name": "Pause Current Job"
+      },
+      "job_action_resume": {
+        "name": "Resume Current Job"
+      },
+      "job_action_stop": {
+        "name": "Stop Current Job"
+      }
+    }
+  }
+}
