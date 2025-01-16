@@ -53,7 +53,7 @@ class Raise3DNumberEntity(
 
     async def async_set_native_value(self, value: float) -> None:
         """Set new value."""
-        await self.coordinator.async_call_method_by_name(
+        await self.async_call_method_by_name(
             self.entity_description.commit_method_name, value
         )
         await asyncio.sleep(1.5)
