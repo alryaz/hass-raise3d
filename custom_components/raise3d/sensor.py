@@ -58,14 +58,14 @@ ED_PRINTER_SYSTEM_INFORMATION = [
         icon="mdi:numeric",
         update_method_name=Raise3DPrinterAPI.get_system_info,
         entity_category=EntityCategory.DIAGNOSTIC,
-        entity_registry_enabled_default=True,
+        entity_registry_enabled_default=False,
     ),
     Raise3DSensorEntityDescription(
         key="api_version",
         icon="mdi:numeric",
         update_method_name=Raise3DPrinterAPI.get_system_info,
         entity_category=EntityCategory.DIAGNOSTIC,
-        entity_registry_enabled_default=True,
+        entity_registry_enabled_default=False,
     ),
     Raise3DSensorEntityDescription(
         key="battery",
@@ -96,7 +96,7 @@ ED_PRINTER_SYSTEM_INFORMATION = [
         key="firmware_version",
         update_method_name=Raise3DPrinterAPI.get_system_info,
         entity_category=EntityCategory.DIAGNOSTIC,
-        entity_registry_enabled_default=True,
+        entity_registry_enabled_default=False,
     ),
     Raise3DSensorEntityDescription(
         key="language",
@@ -108,7 +108,7 @@ ED_PRINTER_SYSTEM_INFORMATION = [
         icon="mdi:printer-3d",
         update_method_name=Raise3DPrinterAPI.get_system_info,
         entity_category=EntityCategory.DIAGNOSTIC,
-        entity_registry_enabled_default=True,
+        entity_registry_enabled_default=False,
     ),
     Raise3DSensorEntityDescription(
         key="machine_ip",
@@ -119,20 +119,20 @@ ED_PRINTER_SYSTEM_INFORMATION = [
         key="machine_name",
         update_method_name=Raise3DPrinterAPI.get_system_info,
         entity_category=EntityCategory.DIAGNOSTIC,
-        entity_registry_enabled_default=True,
+        entity_registry_enabled_default=False,
     ),
     Raise3DSensorEntityDescription(
         key="model",
         update_method_name=Raise3DPrinterAPI.get_system_info,
         entity_category=EntityCategory.DIAGNOSTIC,
-        entity_registry_enabled_default=True,
+        entity_registry_enabled_default=False,
     ),
     Raise3DSensorEntityDescription(
         key="nozzies_num",
         icon="mdi:printer-3d-nozzle",
         update_method_name=Raise3DPrinterAPI.get_system_info,
         entity_category=EntityCategory.DIAGNOSTIC,
-        entity_registry_enabled_default=True,
+        entity_registry_enabled_default=False,
     ),
     Raise3DSensorEntityDescription(
         key="storage_available",
@@ -148,14 +148,14 @@ ED_PRINTER_SYSTEM_INFORMATION = [
         key="update",
         update_method_name=Raise3DPrinterAPI.get_system_info,
         entity_category=EntityCategory.DIAGNOSTIC,
-        entity_registry_enabled_default=True,
+        entity_registry_enabled_default=False,
     ),
     Raise3DSensorEntityDescription(
         key="version",
         icon="mdi:numeric",
         update_method_name=Raise3DPrinterAPI.get_system_info,
         entity_category=EntityCategory.DIAGNOSTIC,
-        entity_registry_enabled_default=True,
+        entity_registry_enabled_default=False,
     ),
 ]
 
@@ -166,14 +166,14 @@ ED_CAMERA_INFORMATION = [
         icon="mdi:ip-network-outline",
         update_method_name=Raise3DPrinterAPI.get_camera_info,
         entity_category=EntityCategory.DIAGNOSTIC,
-        entity_registry_enabled_default=True,
+        entity_registry_enabled_default=False,
     ),
     Raise3DSensorEntityDescription(
         key="password",
         icon="mdi:key",
         update_method_name=Raise3DPrinterAPI.get_camera_info,
         entity_category=EntityCategory.DIAGNOSTIC,
-        entity_registry_enabled_default=True,
+        entity_registry_enabled_default=False,
     ),
     #     Raise3DSensorEntityDescription(
     #         #         key="user_name",

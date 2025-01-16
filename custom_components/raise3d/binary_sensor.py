@@ -23,8 +23,7 @@ from custom_components.raise3d import (
     Raise3DCoordinatorEntityDescription,
     make_platform_async_setup_entry,
 )
-from custom_components.raise3d.api import Raise3DPrinterAPI, APIDataResponse
-from custom_components.raise3d.const import DOMAIN
+from custom_components.raise3d.api import Raise3DPrinterAPI
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -61,13 +60,15 @@ ENTITY_DESCRIPTIONS = [
         key="is_camera_connected",
         icon=("mdi:webcam", "mdi:webcam-off"),
         update_method_name=Raise3DPrinterAPI.get_camera_info,
-        converter=lambda x: isinstance(x, str)
-        and x.lower() == "true"
-        or isinstance(x, bool)
-        and x,
+        converter=(
+            lambda x: isinstance(x, str)
+            and x.lower() == "true"
+            or isinstance(x, bool)
+            and x
+        ),
         device_class=BinarySensorDeviceClass.PRESENCE,
         entity_category=EntityCategory.DIAGNOSTIC,
-        entity_registry_enabled_default=True,
+        entity_registry_enabled_default=False,
     ),
 ]
 
