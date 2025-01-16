@@ -72,7 +72,8 @@ from custom_components.raise3d.const import (
     DEFAULT_SCAN_INTERVAL,
     CONF_PORT,
     CONF_PASSWORD,
-    DEFAULT_MANUFACTURER, PLATFORMS,
+    DEFAULT_MANUFACTURER,
+    PLATFORMS,
 )
 
 _LOGGER = logging.getLogger(__name__)

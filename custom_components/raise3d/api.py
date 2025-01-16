@@ -29,6 +29,10 @@ def create_aiohttp_session():
     return aiohttp.ClientSession(trace_configs=[trace_config])
 
 
+class APIResponseError(aiohttp.ClientResponseError):
+    """Raise3D API response error."""
+
+
 class JobActionValue(StrEnum):
     PAUSE = "pause"
     RESUME = "resume"
@@ -181,11 +185,20 @@ class Raise3DPrinterAPI(Raise3DAPIBase):
             self.logger.debug(f"'{url}' JSON response: {response_data}")
             if response.status == 200 and response_data.get("status") == 1:
                 return response_data.get("data")
-            else:
-                error_msg = response_data.get("error", {}).get("msg", "Unknown error")
-                raise Exception(
-                    f"API Error: {error_msg} (Code: {response_data.get('error', {}).get('code')})"
+            try:
+                error_code = int(response_data.get("error", {}).get("code"))
+            except (TypeError, ValueError):
+                raise aiohttp.ClientError(
+                    f"API Error: {response_data.get('error', {}).get('msg', 'Unknown error')}"
                 )
+            error_msg = response_data.get("error", {}).get("msg", "Unknown error")
+            raise APIResponseError(
+                request_info=response.request_info,
+                history=response.history,
+                status=error_code,
+                message=error_msg,
+                headers=response.headers,
+            )
 
     async def _prv1(self, method: str, url: str, *args, **kwargs) -> APIDataResponse:
         return await self.printer_request(method, "/v1" + url, *args, **kwargs)
