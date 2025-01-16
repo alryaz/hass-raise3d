@@ -77,16 +77,16 @@ jobs:
 
           # Add sections if not empty
           if [[ ! -z "${ALL_FEATURES}" ]]; then
-            CHANGELOG="${CHANGELOG}## :new: Нововведения\n\n${ALL_FEATURES}\n"
+            CHANGELOG="${CHANGELOG}## :new: Improvements\n\n${ALL_FEATURES}\n"
           fi
           if [[ ! -z "${ALL_FIXES}" ]]; then
-            CHANGELOG="${CHANGELOG}## :bug: Исправления\n\n${ALL_FIXES}\n"
+            CHANGELOG="${CHANGELOG}## :bug: Fixes\n\n${ALL_FIXES}\n"
           fi
           if [[ ! -z "${ALL_CHANGES}" ]]; then
-            CHANGELOG="${CHANGELOG}## :wrench: Изменения\n\n${ALL_CHANGES}\n"
+            CHANGELOG="${CHANGELOG}## :wrench: Changes\n\n${ALL_CHANGES}\n"
           fi
           if [[ ! -z "${ALL_OTHER}" ]]; then
-            CHANGELOG="${CHANGELOG}## :information_source: Примечания\n\n${ALL_OTHER}\n"
+            CHANGELOG="${CHANGELOG}## :information_source: Notes\n\n${ALL_OTHER}\n"
           fi
           
           # Clean up changelog
