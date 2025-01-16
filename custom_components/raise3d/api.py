@@ -446,7 +446,7 @@ class Raise3DStatefulPrinterAPI(Raise3DPrinterAPI):
         try:
             return await super().printer_request(*args, **kwargs)
         except aiohttp.ClientResponseError as exc:  # @TODO: check authentication
-            if not auto_auth or exc.status != 403:
+            if not auto_auth or exc.status != 401:
                 raise
             self.logger.warning(f"Authentication error upon request: {exc}")
         if self.printer_token:

@@ -52,7 +52,7 @@ class Raise3DFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                 )
                 system_info = await raise3d_api.get_system_info()
             except aiohttp.ClientError as exc:
-                if isinstance(exc, aiohttp.ClientResponseError) and exc.status == 403:
+                if isinstance(exc, aiohttp.ClientResponseError) and exc.status == 401:
                     errors[CONF_PASSWORD] = "invalid_password"
                 else:
                     errors[CONF_HOST] = "connection_error"
