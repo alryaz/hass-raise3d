@@ -19,7 +19,9 @@
 > 💬 **Technical Support**  
 > [![Telegram Group](https://img.shields.io/endpoint?url=https%3A%2F%2Ftg.sumanjay.workers.dev%2Falryaz_ha_addons&style=for-the-badge)](https://telegram.dog/alryaz_ha_addons)
 
-This is not an official integration by Raise3D.
+> ⚠️ **Warning!** This is not an official integration by Raise3D.
+
+> ℹ️ **Note:** This custom component had been developed overnight as means to familiarize myself with changes in the latest Home Assistant versions. Please do not regard it as a totem of my ignorance towards my other components!
 
 ## Installation
 
