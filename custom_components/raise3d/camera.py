@@ -78,8 +78,12 @@ class Raise3DCamera(Raise3DCoordinatorEntity[Raise3DCameraEntityDescription], Ca
             if not self._attr_available:
                 pass
             elif self.stream.source != self.coordinator.raise3d_api.camera_stream_url:
-                self.logger.debug("Willingly updating stream URL on change for %s", self.entity_id)
-                self.stream.update_source(self.coordinator.raise3d_api.camera_stream_url)
+                self.logger.debug(
+                    "Willingly updating stream URL on change for %s", self.entity_id
+                )
+                self.stream.update_source(
+                    self.coordinator.raise3d_api.camera_stream_url
+                )
 
 
 # noinspection PyArgumentList
