@@ -23,7 +23,7 @@
   },
   "entity": {
     "sensor": {
-      "Serial_number": {
+      "serial_number": {
         "name": "Серийный номер"
       },
       "api_version": {
@@ -68,7 +68,7 @@
       "version": {
         "name": "Версия"
       },
-      "camerserver_URI": {
+      "camerserver_uri": {
         "name": "URI сервера камеры"
       },
       "password": {
@@ -89,16 +89,16 @@
       "heatbed_cur_temp": {
         "name": "Текущая температура стола"
       },
-      "LN_flow_cur_rate": {
+      "ln_flow_cur_rate": {
         "name": "Скорость экструзии левого сопла"
       },
-      "LN_nozzle_cur_temp": {
+      "ln_nozzle_cur_temp": {
         "name": "Температура левого сопла"
       },
-      "RN_flow_cur_rate": {
+      "rn_flow_cur_rate": {
         "name": "Скорость экструзии правого сопла"
       },
-      "RN_nozzle_cur_temp": {
+      "rn_nozzle_cur_temp": {
         "name": "Температура правого сопла"
       },
       "file_name": {
@@ -161,16 +161,16 @@
       "fan_tar_speed": {
         "name": "Целевая скорость вентилятора"
       },
-      "LN_flow_tar_rate": {
+      "ln_flow_tar_rate": {
         "name": "Целевая скорость экструзии левого сопла"
       },
-      "LN_nozzle_tar_temp": {
+      "ln_nozzle_tar_temp": {
         "name": "Целевая температура левого сопла"
       },
-      "RN_flow_tar_rate": {
+      "rn_flow_tar_rate": {
         "name": "Целевая скорость экструзии правого сопла"
       },
-      "RN_nozzle_tar_temp": {
+      "rn_nozzle_tar_temp": {
         "name": "Целевая температура правого сопла"
       }
     },
