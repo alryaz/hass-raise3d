@@ -472,6 +472,21 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
                 config_entry, version=2, minor_version=2, data=data
             )
 
+        if config_entries.minor_version == 2:
+            # Lowercase all unique IDs
+            def _lowercase_unique_ids(data: RegistryEntry) -> dict[str, Any]:
+                return {
+                    "new_unique_id": data.unique_id.lower(),
+                }
+
+            await async_migrate_entries(
+                hass, config_entry.entry_id, _lowercase_unique_ids
+            )
+
+            hass.config_entries.async_update_entry(
+                config_entry, version=2, minor_version=3, data=data
+            )
+
     _LOGGER.debug(
         "Migration to configuration version %s.%s successful",
         config_entry.version,
