@@ -235,42 +235,42 @@ class Raise3DPrinterAPI(Raise3DAPIBase):
     async def get_right_nozzle_info(self) -> APIDataResponse:
         return await self._prv1(aiohttp.hdrs.METH_GET, "/printer/nozzle2")
 
-    async def set_left_nozzle_temp(self, temperature) -> APIDataResponse:
+    async def set_left_nozzle_temp(self, temperature: int) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_POST,
             "/printer/nozzle1/temp/set",
             json={"temperature": temperature},
         )
 
-    async def set_right_nozzle_temp(self, temperature) -> APIDataResponse:
+    async def set_right_nozzle_temp(self, temperature: int) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_POST,
             "/printer/nozzle2/temp/set",
             json={"temperature": temperature},
         )
 
-    async def set_left_nozzle_flowrate(self, flowrate) -> APIDataResponse:
+    async def set_left_nozzle_flowrate(self, flowrate: int) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_POST,
             "/printer/nozzle1/flowrate/set",
             json={"flowrate": flowrate},
         )
 
-    async def set_right_nozzle_flowrate(self, flowrate) -> APIDataResponse:
+    async def set_right_nozzle_flowrate(self, flowrate: int) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_POST,
             "/printer/nozzle2/flowrate/set",
             json={"flowrate": flowrate},
         )
 
-    async def set_heatbed_temp(self, temperature) -> APIDataResponse:
+    async def set_heatbed_temp(self, temperature: int) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_POST,
             "/printer/heatbedtemp/set",
             json={"temperature": temperature},
         )
 
-    async def set_feedrate(self, feedrate) -> APIDataResponse:
+    async def set_feedrate(self, feedrate: int) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_POST, "/printer/feedrate/set", json={"feedrate": feedrate}
         )
@@ -282,7 +282,14 @@ class Raise3DPrinterAPI(Raise3DAPIBase):
         )
 
     async def axis_control(
-        self, is_relative_pos, x=None, y=None, z=None, e=None, feed=None, nozzle=None
+        self,
+        is_relative_pos: int | bool,
+        x: int | None = None,
+        y: int | None = None,
+        z: int | None = None,
+        e: int | None = None,
+        feed: int | None = None,
+        nozzle: int | None = None
     ) -> APIDataResponse:
         params = {"is_relative_pos": int(is_relative_pos)}
         if x is not None:
@@ -305,28 +312,28 @@ class Raise3DPrinterAPI(Raise3DAPIBase):
         return await self.axis_control(False, 0, 0, 0)
 
     # File positioning operations
-    async def move_file(self, file_src, file_dst) -> APIDataResponse:
+    async def move_file(self, file_src: str, file_dst: str) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_POST,
             "/filepos/moveto",
             data={"file_src": file_src, "file_dst": file_dst},
         )
 
-    async def copy_file(self, file_src, file_dst) -> APIDataResponse:
+    async def copy_file(self, file_src: str, file_dst: str) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_POST,
             "/filepos/copy",
             data={"file_src": file_src, "file_dst": file_dst},
         )
 
-    async def rename_file(self, file_path, new_name) -> APIDataResponse:
+    async def rename_file(self, file_path: str, new_name: str) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_POST,
             "/filepos/rename",
             data={"file_path": file_path, "new_name": new_name},
         )
 
-    async def delete_file(self, file_path) -> APIDataResponse:
+    async def delete_file(self, file_path: str) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_POST, "/filepos/delete", params={"data_path": file_path}
         )
@@ -342,7 +349,7 @@ class Raise3DPrinterAPI(Raise3DAPIBase):
             aiohttp.hdrs.METH_POST, "/job/currentjob", params={"operate": operate}
         )
 
-    async def create_job(self, file_path) -> APIDataResponse:
+    async def create_job(self, file_path: str) -> APIDataResponse:
         # @TODO: param may be named 'filepath'
         return await self._prv1(
             aiohttp.hdrs.METH_POST, "/job/create", params={"file_path": file_path}
@@ -351,25 +358,30 @@ class Raise3DPrinterAPI(Raise3DAPIBase):
     async def recover_last_job(self) -> APIDataResponse:
         return await self._prv1(aiohttp.hdrs.METH_POST, "/job/recover/set")
 
-    async def list_jobs(self, start_pos=0, max_num=24) -> APIDataResponse:
+    async def list_jobs(self, start_pos: int = 0, max_num: int = 24) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_GET,
             "/dashboard/job",
             params={"start_pos": start_pos, "max_num": max_num},
         )
 
-    async def get_job(self, job_id, pos) -> APIDataResponse:
+    async def get_job(self, job_id: str, pos: int) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_GET,
             "/dashboard/job",
             params={"job_id": job_id, "pos": pos},
         )
 
-    async def get_job_image(self, job_id, width=32, height=None) -> APIDataResponse:
+    async def get_job_image(
+        self,
+        job_id: str,
+        width: int | None = None,
+        height: int | None = None,
+    ) -> APIDataResponse:
         if height is None:
             height = width or 32
-        elif width is None:
-            width = height or 32
+        if width is None:
+            width = height
         return await self._prv1(
             aiohttp.hdrs.METH_GET,
             "/dashboard/imagedownload",
@@ -377,25 +389,27 @@ class Raise3DPrinterAPI(Raise3DAPIBase):
         )
 
     # Directory positioning operations
-    async def create_directory(self, dir_path) -> APIDataResponse:
+    async def create_directory(self, dir_path: str) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_POST, "/filepos/dir/create", data={"dir_path": dir_path}
         )
 
-    async def rename_directory(self, dir_path, new_name) -> APIDataResponse:
+    async def rename_directory(self, dir_path: str, new_name: str) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_POST,
             "/filepos/dir/rename",
             data={"dir_path": dir_path, "new_name": new_name},
         )
 
-    async def delete_directory(self, dir_path) -> APIDataResponse:
+    async def delete_directory(self, dir_path: str) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_POST, "/filepos/dir/delete", params={"dir_path": dir_path}
         )
 
     # Content handling operations
-    async def upload_file(self, file_path, destination_path) -> APIDataResponse:
+    async def upload_file(
+        self, file_path: str, destination_path: str
+    ) -> APIDataResponse:
         dir_path, _, filename = destination_path.rpartition("/")
         with aiohttp.MultipartWriter("form-data") as mp:
             with open(file_path, "rb") as file:
@@ -412,11 +426,13 @@ class Raise3DPrinterAPI(Raise3DAPIBase):
                     aiohttp.hdrs.METH_POST, "/fileops/upload", data=mp
                 )
 
-    async def download_image(self, data_path, width=32, height=None) -> APIDataResponse:
+    async def download_image(
+        self, data_path: str, width: int | None = None, height: int | None = None
+    ) -> APIDataResponse:
         if height is None:
             height = width or 32
-        elif width is None:
-            width = height or 32
+        if width is None:
+            width = height
         return await self._prv1(
             aiohttp.hdrs.METH_GET,
             "/fileops/imagedownload",
@@ -424,7 +440,7 @@ class Raise3DPrinterAPI(Raise3DAPIBase):
         )
 
     async def list_directory(
-        self, directory_path="Local/", start_pos=0, max_num=24
+        self, directory_path: str = "Local/", start_pos: int = 0, max_num: int = 24
     ) -> APIDataResponse:
         return await self._prv1(
             aiohttp.hdrs.METH_GET,
