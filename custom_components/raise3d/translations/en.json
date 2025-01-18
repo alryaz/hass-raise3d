@@ -23,7 +23,7 @@
   },
   "entity": {
     "sensor": {
-      "Serial_number": {
+      "serial_number": {
         "name": "Serial Number"
       },
       "api_version": {
@@ -68,8 +68,8 @@
       "version": {
         "name": "Version"
       },
-      "camerserver_URI": {
-        "name": "Camera Server Uri"
+      "camerserver_uri": {
+        "name": "Camera Server URI"
       },
       "password": {
         "name": "Password"
@@ -89,16 +89,16 @@
       "heatbed_cur_temp": {
         "name": "Current Heatbed Temp"
       },
-      "LN_flow_cur_rate": {
+      "ln_flow_cur_rate": {
         "name": "Left Nozzle Current Extrusion Speed"
       },
-      "LN_nozzle_cur_temp": {
+      "ln_nozzle_cur_temp": {
         "name": "Left Nozzle Current Temperature"
       },
-      "RN_flow_cur_rate": {
+      "rn_flow_cur_rate": {
         "name": "Right Nozzle Current Extrusion Speed"
       },
-      "RN_nozzle_cur_temp": {
+      "rn_nozzle_cur_temp": {
         "name": "Right Nozzle Current Temperature"
       },
       "file_name": {
@@ -161,16 +161,16 @@
       "fan_tar_speed": {
         "name": "Target Fan Speed"
       },
-      "LN_flow_tar_rate": {
+      "ln_flow_tar_rate": {
         "name": "Left Nozzle Target Extrusion Speed"
       },
-      "LN_nozzle_tar_temp": {
+      "ln_nozzle_tar_temp": {
         "name": "Left Nozzle Target Temperature"
       },
-      "RN_flow_tar_rate": {
+      "rn_flow_tar_rate": {
         "name": "Right Nozzle Target Extrusion Speed"
       },
-      "RN_nozzle_tar_temp": {
+      "rn_nozzle_tar_temp": {
         "name": "Right Nozzle Target Temperature"
       }
     },
