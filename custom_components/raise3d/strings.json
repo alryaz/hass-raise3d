@@ -20,7 +20,7 @@
   },
   "entity": {
     "sensor": {
-      "Serial_number": {
+      "serial_number": {
         "name": "Serial Number"
       },
       "api_version": {
