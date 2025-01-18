@@ -71,8 +71,15 @@ class Raise3DCamera(Raise3DCoordinatorEntity[Raise3DCameraEntityDescription], Ca
     def _process_coordinator_data(self, data: APIDataResponse) -> None:
         # Since there is a single camera entity, we can just check if the camera is connected
         self._attr_available = bool(self.coordinator.data.get("is_camera_connected"))
-
         super()._process_coordinator_data(data)
+        if self.stream:
+            # @TODO: formatted this way in case we need to do something with
+            #        the stream further down the line.
+            if not self._attr_available:
+                pass
+            elif self.stream.source != self.coordinator.raise3d_api.camera_stream_url:
+                self.logger.debug("Willingly updating stream URL on change for %s", self.entity_id)
+                self.stream.update_source(self.coordinator.raise3d_api.camera_stream_url)
 
 
 # noinspection PyArgumentList
