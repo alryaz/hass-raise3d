@@ -67,8 +67,6 @@ ENTITY_DESCRIPTIONS = [
         icon="mdi:heat-wave",
         update_method_name=Raise3DPrinterAPI.get_basic_info,
         commit_method_name=Raise3DPrinterAPI.set_heatbed_temp,
-        # device_class=SensorDeviceClass.TEMPERATURE,
-        # state_class=SensorStateClass.MEASUREMENT,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         native_min_value=0,
         native_max_value=110,
@@ -82,7 +80,7 @@ ENTITY_DESCRIPTIONS = [
         native_unit_of_measurement=PERCENTAGE,
         native_min_value=0,
         native_max_value=100,
-        mode=NumberMode.SLIDER,
+        mode=NumberMode.BOX,
     ),
 ]
 
@@ -114,7 +112,7 @@ for nozzle_name, (update_method, commit_flowrate, commit_temp) in {
                 native_step=1,
                 native_min_value=1,
                 native_max_value=300,
-                mode=NumberMode.SLIDER,
+                mode=NumberMode.BOX,
             ),
             Raise3DNumberEntityDescription(
                 name=f"{nozzle_name} target temperature",
