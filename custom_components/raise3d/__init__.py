@@ -196,7 +196,7 @@ class Raise3DUpdateCoordinator(DataUpdateCoordinator[APIDataResponse | None]):
                 self.logger.warning(
                     f"API does not support '{self.update_method_name}', stopping updater"
                 )
-                self._unschedule_refresh()
+                await self.async_shutdown()
                 return None
             raise
 
