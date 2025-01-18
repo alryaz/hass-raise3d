@@ -1,6 +1,5 @@
 {
   "config": {
-    "title": "Raise3D printer configuration",
     "step": {
       "user": {
         "title": "Define your Raise3D printer connection",
@@ -66,7 +65,7 @@
       "version": {
         "name": "Version"
       },
-      "camerserver_URI": {
+      "camerserver_uri": {
         "name": "Camera Server Uri"
       },
       "password": {
@@ -87,16 +86,16 @@
       "heatbed_cur_temp": {
         "name": "Current Heatbed Temp"
       },
-      "LN_flow_cur_rate": {
+      "ln_flow_cur_rate": {
         "name": "Left Nozzle Current Extrusion Speed"
       },
-      "LN_nozzle_cur_temp": {
+      "ln_nozzle_cur_temp": {
         "name": "Left Nozzle Current Temperature"
       },
-      "RN_flow_cur_rate": {
+      "ln_flow_cur_rate": {
         "name": "Right Nozzle Current Extrusion Speed"
       },
-      "RN_nozzle_cur_temp": {
+      "rn_nozzle_cur_temp": {
         "name": "Right Nozzle Current Temperature"
       },
       "file_name": {
@@ -159,16 +158,16 @@
       "fan_tar_speed": {
         "name": "Target Fan Speed"
       },
-      "LN_flow_tar_rate": {
+      "ln_flow_tar_rate": {
         "name": "Left Nozzle Target Extrusion Speed"
       },
-      "LN_nozzle_tar_temp": {
+      "ln_nozzle_tar_temp": {
         "name": "Left Nozzle Target Temperature"
       },
-      "RN_flow_tar_rate": {
+      "rn_flow_tar_rate": {
         "name": "Right Nozzle Target Extrusion Speed"
       },
-      "RN_nozzle_tar_temp": {
+      "rn_nozzle_tar_temp": {
         "name": "Right Nozzle Target Temperature"
       }
     },
