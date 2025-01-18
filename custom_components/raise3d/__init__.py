@@ -282,12 +282,13 @@ class Raise3DCoordinatorEntity(
     def _process_coordinator_data(self, data: APIDataResponse) -> None:
         _LOGGER.debug("Updating %s with data: %s", self.entity_description.key, data)
 
-        if self._attr_available and self.entity_description.attribute in data:
+        if self.entity_description.attribute in data:
             value = data[self.entity_description.attribute]
             if self.entity_description.converter:
                 value = self.entity_description.converter(value)
             self._attr_native_value = value
         else:
+            self._attr_available = False
             self._attr_native_value = None
 
     @final
@@ -300,7 +301,8 @@ class Raise3DCoordinatorEntity(
         ][2]
         self._attr_available = data is not None
 
-        self._process_coordinator_data(data)
+        if self._attr_available:
+            self._process_coordinator_data(data)
 
         super()._handle_coordinator_update()
 
