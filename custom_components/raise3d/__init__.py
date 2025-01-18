@@ -137,7 +137,7 @@ class Raise3DEntityDescription(EntityDescription):
 
     def __post_init__(self):
         if self.translation_key is None:
-            object.__setattr__(self, "translation_key", self.key)
+            object.__setattr__(self, "translation_key", self.key.lower())
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -472,21 +472,6 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
                 config_entry, version=2, minor_version=2, data=data
             )
 
-        if config_entries.minor_version == 2:
-            # Lowercase all unique IDs
-            def _lowercase_unique_ids(data: RegistryEntry) -> dict[str, Any]:
-                return {
-                    "new_unique_id": data.unique_id.lower(),
-                }
-
-            await async_migrate_entries(
-                hass, config_entry.entry_id, _lowercase_unique_ids
-            )
-
-            hass.config_entries.async_update_entry(
-                config_entry, version=2, minor_version=3, data=data
-            )
-
     _LOGGER.debug(
         "Migration to configuration version %s.%s successful",
         config_entry.version,
@@ -509,7 +494,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # Store data for future use
     hass.data[DOMAIN][entry.entry_id] = (raise3d_api, coordinators, device_info_data)
 
-    # Set up platforms
+    # up platforms
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 
     # Perform first config entry refresh
