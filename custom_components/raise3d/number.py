@@ -84,25 +84,22 @@ ENTITY_DESCRIPTIONS = [
     ),
 ]
 
-for nozzle_name, (update_method, commit_flowrate, commit_temp) in {
-    "Left nozzle": (
+for prefix, (update_method, commit_flowrate, commit_temp) in {
+    "left": (
         Raise3DPrinterAPI.get_left_nozzle_info,
         Raise3DPrinterAPI.set_left_nozzle_flowrate,
         Raise3DPrinterAPI.set_left_nozzle_temp,
     ),
-    "Right nozzle": (
+    "right": (
         Raise3DPrinterAPI.get_right_nozzle_info,
         Raise3DPrinterAPI.set_right_nozzle_flowrate,
         Raise3DPrinterAPI.set_right_nozzle_temp,
     ),
 }.items():
-    prefix = "".join(word[0].upper() for word in nozzle_name.split(" "))
-
     # noinspection PyArgumentList
     ENTITY_DESCRIPTIONS.extend(
         [
             Raise3DNumberEntityDescription(
-                name=f"{nozzle_name} target extrusion speed",
                 key=f"{prefix}_flow_tar_rate",
                 attribute="flow_tar_rate",
                 icon="mdi:printer-3d-nozzle-outline",
@@ -115,7 +112,6 @@ for nozzle_name, (update_method, commit_flowrate, commit_temp) in {
                 mode=NumberMode.BOX,
             ),
             Raise3DNumberEntityDescription(
-                name=f"{nozzle_name} target temperature",
                 key=f"{prefix}_nozzle_tar_temp",
                 attribute="nozzle_tar_temp",
                 icon="mdi:printer-3d-nozzle-heat",
