@@ -289,7 +289,7 @@ class Raise3DPrinterAPI(Raise3DAPIBase):
         z: int | None = None,
         e: int | None = None,
         feed: int | None = None,
-        nozzle: int | None = None
+        nozzle: int | None = None,
     ) -> APIDataResponse:
         params = {"is_relative_pos": int(is_relative_pos)}
         if x is not None:
