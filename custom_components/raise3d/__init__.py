@@ -153,9 +153,6 @@ class Raise3DCoordinatorEntityDescription(Raise3DEntityDescription):
     converter: Callable[[Any], Any] | None = convert_unempty
     """Function to convert the extracted attribute."""
 
-    additional_attributes: dict[str, str] | None = None
-    """Additional attributes (parsed from method dict return)."""
-
     def __post_init__(self):
         super().__post_init__()
         if self.attribute is None:
