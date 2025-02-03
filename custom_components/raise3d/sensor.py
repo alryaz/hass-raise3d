@@ -235,7 +235,7 @@ ED_PRINTER_BASIC_INFORMATION = [
 
 ED_NOZZLE_INFORMATION = []
 
-for nozzle_name, update_method in {
+for prefix, update_method in {
     "LN": Raise3DPrinterAPI.get_left_nozzle_info,
     "RN": Raise3DPrinterAPI.get_right_nozzle_info,
 }.items():
