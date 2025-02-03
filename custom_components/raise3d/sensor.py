@@ -236,15 +236,13 @@ ED_PRINTER_BASIC_INFORMATION = [
 ED_NOZZLE_INFORMATION = []
 
 for nozzle_name, update_method in {
-    "Left nozzle": Raise3DPrinterAPI.get_left_nozzle_info,
-    "Right nozzle": Raise3DPrinterAPI.get_right_nozzle_info,
+    "LN": Raise3DPrinterAPI.get_left_nozzle_info,
+    "RN": Raise3DPrinterAPI.get_right_nozzle_info,
 }.items():
-    prefix = "".join([word[0].upper() for word in nozzle_name.split()])
     # noinspection PyArgumentList
     ED_NOZZLE_INFORMATION.extend(
         [
             Raise3DSensorEntityDescription(
-                # name=f"{nozzle_name} current extrusion speed",
                 key=f"{prefix}_flow_cur_rate",
                 attribute="flow_cur_rate",
                 icon="mdi:printer-3d-nozzle-outline",
@@ -253,7 +251,6 @@ for nozzle_name, update_method in {
                 native_unit_of_measurement=PERCENTAGE,
             ),
             # Raise3DSensorEntityDescription(
-            #     name=f"{nozzle_name} target extrusion speed",
             #     key=f"{prefix}_flow_tar_rate",
             #     attribute="flow_tar_rate",
             #     icon="mdi:printer-3d-nozzle-outline",
@@ -262,7 +259,6 @@ for nozzle_name, update_method in {
             #     native_unit_of_measurement=PERCENTAGE,
             # ),
             Raise3DSensorEntityDescription(
-                # name=f"{nozzle_name} current temperature",
                 key=f"{prefix}_nozzle_cur_temp",
                 attribute="nozzle_cur_temp",
                 icon="mdi:printer-3d-nozzle-heat",
@@ -272,7 +268,6 @@ for nozzle_name, update_method in {
                 native_unit_of_measurement=UnitOfTemperature.CELSIUS,
             ),
             # Raise3DSensorEntityDescription(
-            #     name=f"{nozzle_name} target temperature",
             #     key=f"{prefix}_nozzle_tar_temp",
             #     attribute="nozzle_tar_temp",
             #     icon="mdi:printer-3d-nozzle-heat",
