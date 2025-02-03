@@ -284,6 +284,7 @@ for nozzle_name, update_method in {
         ]
     )
 
+
 def _extrapolate_remaining_time(data: APIDataResponse) -> float:
     """Extrapolate remaining time."""
     if data is None:
@@ -293,6 +294,7 @@ def _extrapolate_remaining_time(data: APIDataResponse) -> float:
     if printed_time is None or total_time is None:
         return 0
     return float(total_time) - float(printed_time)
+
 
 # noinspection PyArgumentList
 ED_PRINTER_CURRENT_JOB_INFORMATION = [
