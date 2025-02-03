@@ -282,7 +282,7 @@ class Raise3DCoordinatorEntity(
     def _process_coordinator_data(self, data: APIDataResponse) -> None:
         key = self.entity_description.attribute
         value = data.get(key)
-        if value is not None: 
+        if value is not None:
             self.logger.debug("%s=data[%s]=%s", self, key, value)
             if self.entity_description.converter:
                 value = self.entity_description.converter(value)
