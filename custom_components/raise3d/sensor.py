@@ -284,6 +284,16 @@ for nozzle_name, update_method in {
         ]
     )
 
+def _extrapolate_remaining_time(data: APIDataResponse) -> float:
+    """Extrapolate remaining time."""
+    if data is None:
+        return 0
+    printed_time = data.get("printed_time")
+    total_time = data.get("total_time")
+    if printed_time is None or total_time is None:
+        return 0
+    return float(total_time) - float(printed_time)
+
 # noinspection PyArgumentList
 ED_PRINTER_CURRENT_JOB_INFORMATION = [
     Raise3DSensorEntityDescription(
@@ -332,6 +342,7 @@ ED_PRINTER_CURRENT_JOB_INFORMATION = [
         device_class=SensorDeviceClass.DURATION,
         native_unit_of_measurement=UnitOfTime.SECONDS,
         suggested_unit_of_measurement=UnitOfTime.HOURS,
+        extrapolated_when_missing=_extrapolate_remaining_time,
     ),
     Raise3DSensorEntityDescription(
         key="job_id",

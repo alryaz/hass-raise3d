@@ -153,6 +153,9 @@ class Raise3DCoordinatorEntityDescription(Raise3DEntityDescription):
     converter: Callable[[Any], Any] | None = convert_unempty
     """Function to convert the extracted attribute."""
 
+    extrapolated_when_missing: Callable[[APIDataResponse], Any] | None = None
+    """Function to extrapolate the attribute when missing."""
+
     def __post_init__(self):
         super().__post_init__()
         if self.attribute is None:
@@ -283,6 +286,12 @@ class Raise3DCoordinatorEntity(
             value = data[self.entity_description.attribute]
             if self.entity_description.converter:
                 value = self.entity_description.converter(value)
+            self._attr_native_value = value
+        elif (
+            self.entity_description.extrapolated_when_missing
+            and (value := self.entity_description.extrapolated_when_missing(data))
+            is not None
+        ):
             self._attr_native_value = value
         else:
             self._attr_available = False
