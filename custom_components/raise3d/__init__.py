@@ -280,10 +280,10 @@ class Raise3DCoordinatorEntity(
 
     @callback
     def _process_coordinator_data(self, data: APIDataResponse) -> None:
-        _LOGGER.debug("Updating %s with data: %s", self.entity_description.key, data)
-
-        if self.entity_description.attribute in data:
-            value = data[self.entity_description.attribute]
+        key = self.entity_description.attribute
+        value = data.get(key)
+        if value is not None: 
+            self.logger.debug("%s=data[%s]=%s", self, key, value)
             if self.entity_description.converter:
                 value = self.entity_description.converter(value)
             self._attr_native_value = value
@@ -292,8 +292,10 @@ class Raise3DCoordinatorEntity(
             and (value := self.entity_description.extrapolated_when_missing(data))
             is not None
         ):
+            self.logger.debug("%s=extrapolated=%s", self, value)
             self._attr_native_value = value
         else:
+            self.logger.debug("%s=unavailable", self)
             self._attr_available = False
             self._attr_native_value = None
 
@@ -567,7 +569,9 @@ def make_platform_async_setup_entry(
             elif issubclass(platform_class, Raise3DEntity):
                 # noinspection PyArgumentList
                 sensor = platform_class(
-                    config_entry=entry, entity_description=entity_description
+                    config_entry=entry,
+                    entity_description=entity_description,
+                    logger=logger,
                 )
             else:
                 raise ValueError("invalid platform_class: {}".format(platform_class))
