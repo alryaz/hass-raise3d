@@ -85,12 +85,12 @@ ENTITY_DESCRIPTIONS = [
 ]
 
 for prefix, (update_method, commit_flowrate, commit_temp) in {
-    "left": (
+    "LN": (
         Raise3DPrinterAPI.get_left_nozzle_info,
         Raise3DPrinterAPI.set_left_nozzle_flowrate,
         Raise3DPrinterAPI.set_left_nozzle_temp,
     ),
-    "right": (
+    "RN": (
         Raise3DPrinterAPI.get_right_nozzle_info,
         Raise3DPrinterAPI.set_right_nozzle_flowrate,
         Raise3DPrinterAPI.set_right_nozzle_temp,
