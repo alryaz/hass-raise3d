@@ -497,24 +497,24 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # up platforms
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 
-    # Perform first config entry refresh
-    coordinator_refresh_tasks = {
-        coordinator: hass.async_create_task(
-            coordinator.async_config_entry_first_refresh()
-        )
-        for coordinator in coordinators.values()
-    }
-    if coordinator_refresh_tasks:
-        await asyncio.wait(
-            coordinator_refresh_tasks.values(), return_when=asyncio.ALL_COMPLETED
-        )
-        for coordinator, task in coordinator_refresh_tasks.items():
-            if task.exception():
-                _LOGGER.error(
-                    "Error during first refresh via '%s': %s",
-                    coordinator.update_method_name,
-                    task.exception(),
-                )
+    # # Perform first config entry refresh
+    # coordinator_refresh_tasks = {
+    #     coordinator: hass.async_create_task(
+    #         coordinator.async_config_entry_first_refresh()
+    #     )
+    #     for coordinator in coordinators.values()
+    # }
+    # if coordinator_refresh_tasks:
+    #     await asyncio.wait(
+    #         coordinator_refresh_tasks.values(), return_when=asyncio.ALL_COMPLETED
+    #     )
+    #     for coordinator, task in coordinator_refresh_tasks.items():
+    #         if task.exception():
+    #             _LOGGER.error(
+    #                 "Error during first refresh via '%s': %s",
+    #                 coordinator.update_method_name,
+    #                 task.exception(),
+    #             )
 
     return True
 
