@@ -307,6 +307,7 @@ ED_PRINTER_CURRENT_JOB_INFORMATION = [
         update_method_name=Raise3DPrinterAPI.get_current_job,
         state_class=SensorStateClass.TOTAL_INCREASING,
         native_unit_of_measurement=PERCENTAGE,
+        suggested_display_precision=2,
     ),
     Raise3DSensorEntityDescription(
         key="printed_layer",
