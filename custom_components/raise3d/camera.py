@@ -81,7 +81,10 @@ class Raise3DCamera(Raise3DCoordinatorEntity[Raise3DCameraEntityDescription], Ca
         # stream an MJPEG image stream directly from the camera
         stream_coro = api.session.get(
             streaming_url,
-            # auth=self._token,
+            auth=aiohttp.BasicAuth(
+                api.camera_username,
+                api.camera_password,
+            ),
             timeout=aiohttp.ClientTimeout(total=300),
         )
 
