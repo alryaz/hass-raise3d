@@ -36,7 +36,7 @@ import logging
 from abc import abstractmethod
 from dataclasses import dataclass
 from datetime import timedelta
-from typing import Callable, final, Any, Mapping, Iterable, Awaitable, Generic
+from typing import Callable, final, Any, Mapping, Iterable, Awaitable, Generic, TypeVar
 
 import aiohttp
 import homeassistant.helpers.config_validation as cv
@@ -58,7 +58,6 @@ from homeassistant.helpers.update_coordinator import (
     DataUpdateCoordinator,
     CoordinatorEntity,
 )
-from typing_extensions import TypeVar
 
 from custom_components.raise3d.api import (
     Raise3DHostBasedStatefulAPI,
