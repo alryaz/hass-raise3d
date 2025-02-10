@@ -451,19 +451,23 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
             # noinspection PyTypeChecker
             renamed_unique_ids = await hass.async_add_executor_job(_collect_entity_keys)
 
-            def _refactor_unique_ids(data: RegistryEntry) -> dict[str, Any] | None:
+            def _refactor_unique_ids(
+                entry_data: RegistryEntry,
+            ) -> dict[str, Any] | None:
                 try:
-                    entity_platform, new_unique_id = renamed_unique_ids[data.unique_id]
+                    entity_platform, new_unique_id_ = renamed_unique_ids[
+                        entry_data.unique_id
+                    ]
                 except KeyError:
                     return None
                 else:
                     # For entities whose platforms sustained, update unique id.
-                    if entity_platform == data.platform:
-                        return {"new_unique_id": new_unique_id}
+                    if entity_platform == entry_data.platform:
+                        return {"new_unique_id": new_unique_id_}
 
                     # For entities whose platforms migrated, disable and hide.
                     return {
-                        "new_unique_id": new_unique_id + "__obsolete",
+                        "new_unique_id": new_unique_id_ + "__obsolete",
                         "disabled_by": RegistryEntryDisabler.INTEGRATION,
                         "hidden_by": RegistryEntryHider.INTEGRATION,
                     }
@@ -548,6 +552,7 @@ def make_platform_async_setup_entry(
     platform_class: type[BaseRaise3DEntity],
     logger: logging.Logger | logging.LoggerAdapter = _LOGGER,
 ) -> Callable[[HomeAssistant, ConfigEntry, AddEntitiesCallback], Awaitable[bool]]:
+    # noinspection PyShadowingNames
     async def async_setup_entry(
         hass: HomeAssistant,
         entry: ConfigEntry,
