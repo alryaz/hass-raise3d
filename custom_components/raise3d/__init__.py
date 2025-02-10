@@ -245,10 +245,13 @@ class Raise3DEntity(
     BaseRaise3DEntity[_TRaise3DEntityDescription], Generic[_TRaise3DEntityDescription]
 ):
     def __init__(
-        self, config_entry: ConfigEntry, entity_description: _TRaise3DEntityDescription
+        self,
+        config_entry: ConfigEntry,
+        entity_description: _TRaise3DEntityDescription,
+        logger: logging.Logger | logging.LoggerAdapter = _LOGGER,
     ) -> None:
         self._config_entry = config_entry
-        super().__init__(entity_description)
+        super().__init__(entity_description, logger)
 
     @property
     def config_entry(self) -> ConfigEntry:
