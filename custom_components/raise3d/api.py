@@ -111,6 +111,20 @@ class Raise3DCameraAPI(Raise3DAPIBase):
             return request.status == 501
 
     @property
+    def camera_bare_stream_url(self) -> str:
+        parsed_url = urllib.parse.urlparse(self.camera_url)
+        return urllib.parse.urlunparse(
+            (
+                parsed_url.scheme,
+                parsed_url.netloc,
+                posixpath.join(parsed_url.path, "/api/v1/camera/stream"),
+                parsed_url.params,
+                "",
+                "",
+            )
+        )
+
+    @property
     def camera_stream_url(self) -> str:
         parsed_url = urllib.parse.urlparse(self.camera_url)
         return urllib.parse.urlunparse(
