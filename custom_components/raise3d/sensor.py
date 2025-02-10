@@ -12,6 +12,7 @@ __all__ = (
 import logging
 from dataclasses import dataclass
 from datetime import datetime, UTC
+from typing import Any
 
 from homeassistant.components.sensor import (
     SensorEntity,
@@ -42,6 +43,15 @@ from custom_components.raise3d.api import (
 )
 
 _LOGGER = logging.getLogger(__name__)
+
+OCTOPRINT_STATUS_MAPPING = {
+    RunningStatusValue.IDLE: "Operational",
+    RunningStatusValue.PAUSED: "Paused",
+    RunningStatusValue.RUNNING: "Printing",
+    RunningStatusValue.BUSY: "Starting",
+    RunningStatusValue.COMPLETED: "Finishing",
+    RunningStatusValue.ERROR: "Error",
+}
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -190,6 +200,19 @@ ED_PRINTER_RUNNING_STATUS = [
         update_method_name=Raise3DPrinterAPI.get_running_status,
         device_class=SensorDeviceClass.ENUM,
         options=[status.value for status in RunningStatusValue],
+    ),
+    # OctoPrint compatibility
+    Raise3DSensorEntityDescription(
+        key="octoprint_status",
+        attribute="running_status",
+        icon="mdi:state-machine",
+        update_method_name=Raise3DPrinterAPI.get_running_status,
+        converter=wrap_convert_unempty(
+            lambda x: OCTOPRINT_STATUS_MAPPING.get(x, "Unknown State")
+        ),
+        device_class=SensorDeviceClass.ENUM,
+        options=list(OCTOPRINT_STATUS_MAPPING.values()),
+        entity_registry_enabled_default=False,
     ),
 ]
 
