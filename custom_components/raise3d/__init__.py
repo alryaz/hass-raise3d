@@ -505,8 +505,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             hass, entry.data, entry.options
         )
         device_info_data = await async_fetch_device_info(raise3d_api)
-    except aiohttp.ClientResponseError:
-        raise ConfigEntryNotReady("Error connecting to the Raise3D printer")
+    except (aiohttp.ClientConnectorError, aiohttp.ClientResponseError) as exc:
+        _LOGGER.error("Error connecting to the Raise3D printer: %s", exc, exc_info=exc)
+        raise ConfigEntryNotReady("Error connecting to the Raise3D printer") from exc
 
     coordinators: dict[str, Raise3DUpdateCoordinator] = {}
 
