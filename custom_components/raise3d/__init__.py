@@ -44,6 +44,7 @@ import voluptuous as vol
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_HOST, CONF_SCAN_INTERVAL
 from homeassistant.core import HomeAssistant, callback
+from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity import EntityDescription, Entity
@@ -496,10 +497,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up this integration using UI."""
 
     # Initialize and connect API
-    raise3d_api = await async_initialize_api_from_configuration(
-        hass, entry.data, entry.options
-    )
-    device_info_data = await async_fetch_device_info(raise3d_api)
+    try:
+        raise3d_api = await async_initialize_api_from_configuration(
+            hass, entry.data, entry.options
+        )
+        device_info_data = await async_fetch_device_info(raise3d_api)
+    except aiohttp.ClientResponseError:
+        raise ConfigEntryNotReady("Error connecting to the Raise3D printer")
+
     coordinators: dict[str, Raise3DUpdateCoordinator] = {}
 
     # Store data for future use
@@ -508,24 +513,24 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # up platforms
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 
-    # # Perform first config entry refresh
-    # coordinator_refresh_tasks = {
-    #     coordinator: hass.async_create_task(
-    #         coordinator.async_config_entry_first_refresh()
-    #     )
-    #     for coordinator in coordinators.values()
-    # }
-    # if coordinator_refresh_tasks:
-    #     await asyncio.wait(
-    #         coordinator_refresh_tasks.values(), return_when=asyncio.ALL_COMPLETED
-    #     )
-    #     for coordinator, task in coordinator_refresh_tasks.items():
-    #         if task.exception():
-    #             _LOGGER.error(
-    #                 "Error during first refresh via '%s': %s",
-    #                 coordinator.update_method_name,
-    #                 task.exception(),
-    #             )
+    # Perform first config entry refresh
+    coordinator_refresh_tasks = {
+        coordinator: hass.async_create_task(
+            coordinator.async_config_entry_first_refresh()
+        )
+        for coordinator in coordinators.values()
+    }
+    if coordinator_refresh_tasks:
+        await asyncio.wait(
+            coordinator_refresh_tasks.values(), return_when=asyncio.ALL_COMPLETED
+        )
+        for coordinator, task in coordinator_refresh_tasks.items():
+            if task.exception():
+                _LOGGER.error(
+                    "Error during first refresh via '%s': %s",
+                    coordinator.update_method_name,
+                    task.exception(),
+                )
 
     return True
 
