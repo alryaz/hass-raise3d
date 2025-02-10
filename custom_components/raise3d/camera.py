@@ -12,6 +12,7 @@ __all__ = (
 import asyncio
 import logging
 from dataclasses import dataclass
+from aiohttp import BasicAuth
 
 from homeassistant.components.camera import (
     Camera,
@@ -81,7 +82,7 @@ class Raise3DCamera(Raise3DCoordinatorEntity[Raise3DCameraEntityDescription], Ca
         # stream an MJPEG image stream directly from the camera
         stream_coro = api.session.get(
             streaming_url,
-            auth=aiohttp.BasicAuth(
+            auth=BasicAuth(
                 api.camera_username,
                 api.camera_password,
             ),
