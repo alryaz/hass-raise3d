@@ -12,7 +12,7 @@ __all__ = (
 import asyncio
 import logging
 from dataclasses import dataclass
-from aiohttp import BasicAuth
+from aiohttp import BasicAuth, ClientTimeout
 
 from homeassistant.components.camera import (
     Camera,
@@ -86,7 +86,7 @@ class Raise3DCamera(Raise3DCoordinatorEntity[Raise3DCameraEntityDescription], Ca
                 api.camera_username,
                 api.camera_password,
             ),
-            timeout=aiohttp.ClientTimeout(total=300),
+            timeout=ClientTimeout(total=300),
         )
 
         return await async_aiohttp_proxy_web(self.hass, request, stream_coro)
