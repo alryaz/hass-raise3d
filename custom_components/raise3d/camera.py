@@ -18,6 +18,7 @@ from homeassistant.components.camera import (
     CameraEntityFeature,
     CameraEntityDescription,
 )
+from homeassistant.helpers.aiohttp_client import async_aiohttp_proxy_web
 
 from custom_components.raise3d import (
     Raise3DCoordinatorEntity,
@@ -58,6 +59,33 @@ class Raise3DCamera(Raise3DCoordinatorEntity[Raise3DCameraEntityDescription], Ca
     ) -> bytes | None:
         """Return bytes of camera image."""
         return await self.coordinator.raise3d_api.get_snapshot()
+
+    async def handle_async_mjpeg_stream(
+        self, request: web.Request
+    ) -> web.StreamResponse | None:
+        """Return an MJPEG stream."""
+        api = self.coordinator.raise3d_api
+        
+        if not self.available:
+            _LOGGER.warning(
+                "Attempt to stream when printer %s camera is unavailable",
+                api,
+            )
+            return None
+
+        # check is streaming is available
+        if not (streaming_url := api.camera_stream_url):
+            streaming_url = await self.stream_source()
+        assert streaming_url, "stream URL is empty"
+
+        # stream an MJPEG image stream directly from the camera
+        stream_coro = api.session.get(
+            streaming_url,
+            # auth=self._token,
+            timeout=aiohttp.ClientTimeout(total=300),
+        )
+
+        return await async_aiohttp_proxy_web(self.hass, request, stream_coro)
 
     async def stream_source(self) -> str | None:
         """Return the source of the stream."""
