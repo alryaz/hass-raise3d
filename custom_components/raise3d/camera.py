@@ -65,7 +65,7 @@ class Raise3DCamera(Raise3DCoordinatorEntity[Raise3DCameraEntityDescription], Ca
     ) -> web.StreamResponse | None:
         """Return an MJPEG stream."""
         api = self.coordinator.raise3d_api
-        
+
         if not self.available:
             _LOGGER.warning(
                 "Attempt to stream when printer %s camera is unavailable",
