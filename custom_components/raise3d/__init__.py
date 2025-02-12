@@ -369,6 +369,7 @@ async def async_initialize_api_from_configuration(
     data: Mapping[str, Any],
     options: Mapping[str, Any] | None = None,
 ) -> Raise3DHostBasedStatefulAPI:
+    """Initialize Raise3D API from configuration."""
     raise3d_api = Raise3DHostBasedStatefulAPI(
         host=data[CONF_HOST],
         printer_port=data[CONF_PORT],
@@ -506,7 +507,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         )
         device_info_data = await async_fetch_device_info(raise3d_api)
     except (aiohttp.ClientConnectorError, aiohttp.ClientResponseError) as exc:
-        _LOGGER.error("Error connecting to the Raise3D printer: %s", exc, exc_info=exc)
+        logger_kwargs = {}
+        if _LOGGER.isEnabledFor(logging.DEBUG):
+            logger_kwargs["exc_info"] = exc
+        _LOGGER.warning("Error during initial communication: %s", exc, **logger_kwargs)
         raise ConfigEntryNotReady("Error connecting to the Raise3D printer") from exc
 
     coordinators: dict[str, Raise3DUpdateCoordinator] = {}
@@ -529,11 +533,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             coordinator_refresh_tasks.values(), return_when=asyncio.ALL_COMPLETED
         )
         for coordinator, task in coordinator_refresh_tasks.items():
-            if task.exception():
+            exc = task.exception()
+            if exc and not isinstance(exc, asyncio.CancelledError):
+                logger_kwargs = {}
+                if _LOGGER.isEnabledFor(logging.DEBUG):
+                    logger_kwargs["exc_info"] = exc
                 _LOGGER.error(
                     "Error during first refresh via '%s': %s",
                     coordinator.update_method_name,
-                    task.exception(),
+                    exc,
+                    **logger_kwargs,
                 )
 
     return True
