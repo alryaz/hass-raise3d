@@ -41,6 +41,8 @@ class Raise3DBinarySensorEntityDescription(
 class Raise3DBinarySensorEntity(
     Raise3DCoordinatorEntity[BinarySensorEntityDescription], BinarySensorEntity
 ):
+    """Generic class for Raise3D binary sensors"""
+
     @property
     def icon(self) -> str | None:
         """Return the icon."""
